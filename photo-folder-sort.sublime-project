@@ -1,0 +1,33 @@
+{
+    "folders":
+    [
+        {
+            "path": ".",
+            "folder_exclude_patterns": [
+                    "__pycache__",
+                    "*.egg*",
+                    ".tox",
+                    "htmlcov",
+                    "build",
+                    "dist"
+                ],
+            "file_exclude_patterns": [
+                    "*.pyc",
+                    ".coverage",
+                    ".pickle",
+                    "*.sublime-workspace"
+                ]
+        }
+    ],
+
+    "build_systems":
+    [
+        {
+            "selector": "source.python",
+            "name": "Python (photo-folder-sort)",
+            "linux": {"path": "$WORKON_HOME/photo-folder-sort/bin"},
+            "windows": {"path": "$WORKON_HOME\\photo-folder-sort\\Scripts"},
+            "cmd": ["python", "$file"]
+        }
+    ]
+}
