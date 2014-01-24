@@ -2,7 +2,6 @@ import datetime
 import logging
 import os
 import pprint
-import re
 import sys
 
 import pyexiv2
