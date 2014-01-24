@@ -8,8 +8,7 @@ import sys
 import pyexiv2
 
 logging.basicConfig()
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.WARNING)
+logging.setLevel(logging.WARNING)
 
 
 def rget(mapping_object, keys, default=None):
@@ -50,8 +49,7 @@ def get_photo_timestamp(filepath):
 
 
 def set_folder_dates_to_median(path):
-
-        logger.info('Setting timestamps for {0}'.format(path))
+        logging.info('Setting timestamps for {0}'.format(path))
 
         dirpath, dirnames, filenames = os.walk(path).next()
 
@@ -69,12 +67,11 @@ def set_folder_dates_to_median(path):
             atime = (datetime.datetime.today() - epoch).total_seconds()
             mtime = (median_timestamp - epoch).total_seconds()
 
-            os.utime(path, (atime, mtime))
-            logger.debug("Set Accessed time for {0} to {1}".format(path, atime))
-            logger.debug("Set Modified time for {0} to {1}".format(path, mtime))
+            os.utim(path, (atime, mtime))
+            loggingdebug("Set Accessed time for {0} to {1}".format(path, atime))
+            logging.debug("Set Modified time for {0} to {1}".format(path, mtime))
 
-        else:
-            logger.warning("No valid timestamps found for {0}".format(path))
+        else:            logging.warning("No valid timestamps found for {0}".format(path))
 
 
 if __name__ == '__main__':
