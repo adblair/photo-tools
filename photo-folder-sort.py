@@ -13,9 +13,9 @@ def rget(mapping_object, keys, default=None):
     """Return the value from a dict-like object for the first valid key in the
     given seqence of keys, or else a default value if none of the keys is set.
 
-    @param mapping_object: A dict-like object (must have a .get() method)
-    @param keys: A sequence of keys to try in order
-    @param default: The default value to return, if none of the keys is present
+    :param mapping_object: A dict-like object (must have a .get() method)
+    :param keys: A sequence of keys to try in order
+    :param default: The default value to return, if none of the keys is present
     """
     next = rget(mapping_object, keys[1:]) if len(keys) > 1 else default
     return mapping_object.get(keys[0], next)
