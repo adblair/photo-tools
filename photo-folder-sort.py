@@ -5,8 +5,7 @@ import sys
 
 import pyexiv2
 
-logging.basicConfig()
-logging.setLevel(logging.WARNING)
+logging.basicConfig(level=logging.WARNING)
 
 
 def rget(mapping_object, keys, default=None):
@@ -65,8 +64,8 @@ def set_folder_dates_to_median(path):
             atime = (datetime.datetime.today() - epoch).total_seconds()
             mtime = (median_timestamp - epoch).total_seconds()
 
-            os.utim(path, (atime, mtime))
-            loggingdebug("Set Accessed time for {0} to {1}".format(path, atime))
+            os.utime(path, (atime, mtime))
+            logging.debug("Set Accessed time for {0} to {1}".format(path, atime))
             logging.debug("Set Modified time for {0} to {1}".format(path, mtime))
 
         else:            logging.warning("No valid timestamps found for {0}".format(path))
