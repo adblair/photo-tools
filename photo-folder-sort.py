@@ -46,29 +46,29 @@ def get_photo_timestamp(filepath):
 
 
 def set_folder_dates_to_median(path):
-        logging.info('Setting timestamps for {0}'.format(path))
+    logging.info('Setting timestamps for {0}'.format(path))
 
-        dirpath, dirnames, filenames = os.walk(path).next()
+    dirpath, dirnames, filenames = os.walk(path).next()
 
-        timestamps = [get_photo_timestamp(os.path.join(dirpath, fname)) for fname in filenames]
-        timestamps = sorted([tstamp.replace(tzinfo=None) for tstamp in timestamps if tstamp])
+    timestamps = [get_photo_timestamp(os.path.join(dirpath, fname)) for fname in filenames]
+    timestamps = sorted([tstamp.replace(tzinfo=None) for tstamp in timestamps if tstamp])
 
-        if timestamps:
+    if timestamps:
 
-            median_timestamp = timestamps[int(len(timestamps)/2)]
+        median_timestamp = timestamps[int(len(timestamps)/2)]
 
-            """Generate integers (number of seconds since epoch) to represent
-            the Accessed and Modified timestamps, to be set for this folder.
-            """
-            epoch = datetime.datetime.utcfromtimestamp(0)
-            atime = (datetime.datetime.today() - epoch).total_seconds()
-            mtime = (median_timestamp - epoch).total_seconds()
+        """Generate integers (number of seconds since epoch) to represent
+        the Accessed and Modified timestamps, to be set for this folder.
+        """
+        epoch = datetime.datetime.utcfromtimestamp(0)
+        atime = (datetime.datetime.today() - epoch).total_seconds()
+        mtime = (median_timestamp - epoch).total_seconds()
 
-            os.utime(path, (atime, mtime))
-            logging.debug("Set Accessed time for {0} to {1}".format(path, atime))
-            logging.debug("Set Modified time for {0} to {1}".format(path, mtime))
+        os.utime(path, (atime, mtime))
+        logging.debug("Set Accessed time for {0} to {1}".format(path, atime))
+        logging.debug("Set Modified time for {0} to {1}".format(path, mtime))
 
-        else:            logging.warning("No valid timestamps found for {0}".format(path))
+    else:            logging.warning("No valid timestamps found for {0}".format(path))
 
 
 if __name__ == '__main__':
