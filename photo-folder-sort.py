@@ -68,7 +68,8 @@ def set_folder_dates_to_median(path):
         logging.debug("Set Accessed time for {0} to {1}".format(path, atime))
         logging.debug("Set Modified time for {0} to {1}".format(path, mtime))
 
-    else:            logging.warning("No valid timestamps found for {0}".format(path))
+    else:
+        logging.warning("No valid timestamps found for {0}".format(path))
 
 
 if __name__ == '__main__':
